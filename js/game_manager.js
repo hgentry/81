@@ -229,27 +229,27 @@ GameManager.prototype.tileMatchesAvailable = function () {
   var tile;
   var i = 0;
   while(i < 4){
-  for (var x = 0; x < this.size; x++) {
-    for (var y = 0; y < this.size; y++) {
-      var vector = this.getVector(i);
-      tile = this.grid.cellContent({ x: x, y: y });
+    for (var x = 0; x < this.size; x++) {
+      for (var y = 0; y < this.size; y++) {
+        var vector = this.getVector(i);
+        tile = this.grid.cellContent({ x: x, y: y });
 
-      cell = { x: x, y: y };
-      tile = self.grid.cellContent(cell);
+        cell = { x: x, y: y };
+        tile = self.grid.cellContent(cell);
 
-       if (tile) {
-        var positions = self.findFarthestPosition(cell, vector);
-        var next      = self.grid.cellContent(positions.next);
-	var pos2 = self.findFarthestPosition({x: cell.x + vector.x, y: cell.y + vector.y}, vector);
-	var next2     = self.grid.cellContent(pos2.next);
-        // Only one merger per row traversal?
-        if (next && next.value === tile.value && next2 && next2.value === tile.value && !next.mergedFrom && next != next2) {
-		return true;
+         if (tile) {
+          var positions = self.findFarthestPosition(cell, vector);
+          var next      = self.grid.cellContent(positions.next);
+	        var pos2 = self.findFarthestPosition({x: cell.x + vector.x, y: cell.y + vector.y}, vector);
+	        var next2     = self.grid.cellContent(pos2.next);
+          // Only one merger per row traversal?
+          if (next && next.value === tile.value && next2 && next2.value === tile.value && !next.mergedFrom && next != next2) {
+		        return true;
+         }
+        }
       }
     }
-  }
-	i += 1;
-}
+	  i += 1;
 	}
 
   return false;
