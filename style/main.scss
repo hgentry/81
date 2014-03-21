@@ -12,8 +12,9 @@ $mobile-threshold: $field-width + 20px;
 $text-color: #776E65;
 $bright-text-color: #f9f6f2;
 
-$tile-color: #eee4da;
-$tile-gold-color: #edc22e;
+$tile-color: #dddddd;
+$tile-gold-color: #CBF2E9;
+$tile-super-color: #9E2187;
 $tile-gold-glow-color: lighten($tile-gold-color, 15%);
 
 $game-container-background: #bbada0;
@@ -327,17 +328,17 @@ hr {
   -moz-transition-property: -moz-transform;
   transition-property: transform;
 
-  $base: 2;
+  $base: 3;
   $exponent: 1;
   $limit: 11;
 
   // Colors for all 11 states, false = no special color
-  $special-colors: false false, // 2
-                   false false, // 4
-                   #f78e48 true, // 8
-                   #fc5e2e true, // 16
-                   #ff3333 true, // 32
-                   #ff0000 true, // 64
+  $special-colors: #D4ABCC false, // 2
+                   #A4D1DE false, // 4
+                   #F5A9E7 true, // 8
+                   #BBE6F2 true, // 16
+                   #D957C1 true, // 32
+                   #1AB890 true, // 64
                    false true, // 128
                    false true, // 256
                    false true, // 512
@@ -400,7 +401,7 @@ hr {
   // Super tiles (above 2048)
   &.tile-super .tile-inner {
     color: $bright-text-color;
-    background: mix(#333, $tile-gold-color, 95%);
+    background: $tile-super-color;
 
     font-size: 30px;
 
