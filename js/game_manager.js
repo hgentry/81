@@ -127,8 +127,13 @@ GameManager.prototype.move = function (direction) {
       else if (tile) {
         var positions = self.findFarthestPosition(cell, vector);
         var next      = self.grid.cellContent(positions.next);
-	var pos2 = self.findFarthestPosition({x: cell.x + vector.x, y: cell.y + vector.y}, vector);
-	var next2     = self.grid.cellContent(pos2.next);
+        var pos2 = null;
+        var next2 = null;
+	      if(next)
+        {
+	        pos2 = self.findFarthestPosition({x: next.x, y: next.y}, vector);
+	        next2     = self.grid.cellContent(pos2.next);
+        }
         // Only one merger per row traversal?
         if (next && next.value === tile.value && next2 && next2.value === tile.value && !next.mergedFrom && next != next2) {
           var merged = new Tile(pos2.next, tile.value * 3);
@@ -151,14 +156,16 @@ GameManager.prototype.move = function (direction) {
           // The mighty 2048 tile
           if (merged.value === 243) self.won = true;
         }
+        
 	 else if (!tile.merged){
           self.moveTile(tile, positions.farthest);
         }
 
-        if (!self.positionsEqual(cell, tile)) {
+        if (tile && !self.positionsEqual(cell, tile)) {
           moved = true; // The tile moved from its original cell!
         }
-      }
+        }
+      
     });
   });
 
