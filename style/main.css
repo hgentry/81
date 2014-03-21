@@ -315,13 +315,13 @@ hr {
     background: #bcd7de; }
   .tile.tile-27 .tile-inner {
     color: #f9f6f2;
-    background: #e8c2e3; }
+    background: #ca96c3; }
   .tile.tile-81 .tile-inner {
     color: #f9f6f2;
-    background: #c7e4e9; }
+    background: #83aec1; }
   .tile.tile-243 .tile-inner {
     color: #f9f6f2;
-    background: #d796cf;
+    background: #ae7ca9;
     font-size: 45px; }
     @media screen and (max-width: 520px) {
       .tile.tile-243 .tile-inner {
