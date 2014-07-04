@@ -130,10 +130,46 @@ HTMLActuator.prototype.message = function (won) {
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
+  this.messageContainer.appendChild(this.showSocialButtons());
 };
 
 HTMLActuator.prototype.clearMessage = function () {
   // IE only takes one value to remove at a time.
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
+};
+
+HTMLActuator.prototype.showSocialButtons = function () {
+    var text = "I scored " + this.score + " points at 243, a game where you join nubers to score high! @mishopet"
+    var html =
+                '<div id="social-buttons" class="fadeable fade">'
+	    + '<ul class="social">'
+            + '<li class="reddit"><div class="fb-like" data-href="http://hgentry.github.io/81/" data-layout="box_count" data-width="50" ></div></li>'
+            + '<li class="gplus"><div class="g-plusone-frame"><div class="g-plusone" data-size="tall" data-href="http://hgentry.github.io/81/"></div></div></li>'
+            + '<li class="twitter"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://hgentry.github.io/81/" data-text="'+ text +'" data-count="vertical" data-hashtags="243game" >Tweet</a></li></ul>'
+            + '<div id="fb-root"></div>'
+            + '</div>';
+    document.getElementById( 'viewport' ).insertAdjacentHTML( 'beforeEnd', html );
+    
+    var script = document.createElement( 'script' );
+    script.async = true;
+    script.src = document.location.protocol + '//connect.facebook.net/en_US/all.js#xfbml=1&appId=239765196226361';
+    document.getElementById( 'fb-root' ).appendChild( script );
+
+    script = document.createElement( 'script' );
+    script.async = true;
+    script.src = document.location.protocol + '//platform.twitter.com/widgets.js';
+    document.getElementById( 'social-buttons' ).appendChild( script );
+
+    script = document.createElement( 'script' );
+    script.async = true;
+    script.src = document.location.protocol + '//apis.google.com/js/plusone.js';
+    document.getElementById( 'social-buttons' ).appendChild( script );
+
+    window.setTimeout( function () {
+
+        document.getElementById( 'social-buttons' ).removeAttribute( 'class' );
+
+    }, 1000 );
+   return html
 };
