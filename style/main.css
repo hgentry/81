@@ -21,6 +21,21 @@ h1.title {
   margin: 0;
   display: block;
   float: left; }
+  
+#social-buttons { display: block; margin: 10px auto;
+    transition:             opacity 1000ms ease;
+        -moz-transition:    opacity 1000ms ease;
+        -ms-transition:     opacity 1000ms ease;
+        -o-transition:      opacity 1000ms ease;
+        -webkit-transition: opacity 1000ms ease;
+}
+
+#social-buttons .social { list-style: none; margin: 0px; padding: 0; }
+#social-buttons .social li {display: inline-block; margin-left: 5px;   text-align: center;
+    vertical-align: top; }
+.fade {
+    opacity: 0 !important;
+}
 
 @-webkit-keyframes move-up {
   0% {
