@@ -132,8 +132,7 @@ GameManager.prototype.move = function (direction) {
           pos2 = self.findFarthestPosition({x: next.x, y: next.y}, vector);
           next2 = self.grid.cellContent(pos2.next);
         }
-        // Only one merger per row traversal?
-        if (next && next.value === tile.value && next2 && next2.value === tile.value && !next.mergedFrom && next != next2) {
+        if (next && next.value === tile.value && next2 && next2.value === tile.value && !next.mergedFrom && !next2.mergedFrom && next != next2) {
           var merged = new Tile(pos2.next, tile.value * 3);
           merged.mergedFrom = [next2, next, tile];
           tile.merged = true;
