@@ -121,51 +121,46 @@ GameManager.prototype.move = function (direction) {
       cell = { x: x, y: y };
       tile = self.grid.cellContent(cell);
 
-	if(tile && tile.merged) {
-		self.grid.removeTile(tile);
-	}
-      else if (tile) {
+      if (tile && tile.merged) {
+        self.grid.removeTile(tile);
+      } else if (tile) {
         var positions = self.findFarthestPosition(cell, vector);
         var next      = self.grid.cellContent(positions.next);
         var pos2 = null;
         var next2 = null;
-	      if(next)
-        {
-	        pos2 = self.findFarthestPosition({x: next.x, y: next.y}, vector);
-	        next2     = self.grid.cellContent(pos2.next);
+        if (next) {
+          pos2 = self.findFarthestPosition({x: next.x, y: next.y}, vector);
+          next2 = self.grid.cellContent(pos2.next);
         }
         // Only one merger per row traversal?
         if (next && next.value === tile.value && next2 && next2.value === tile.value && !next.mergedFrom && next != next2) {
           var merged = new Tile(pos2.next, tile.value * 3);
           merged.mergedFrom = [next2, next, tile];
-	tile.merged = true;
-	next.merged = true;
-	next2.merged = true;
-          
-          self.grid.removeTile(tile);
-          self.grid.removeTile(next);	
-          self.grid.removeTile(next2);	
+          tile.merged = true;
+          next.merged = true;
+          next2.merged = true;
 
-	self.grid.insertTile(merged);
+          self.grid.removeTile(tile);
+          self.grid.removeTile(next);
+          self.grid.removeTile(next2);
+
+          self.grid.insertTile(merged);
           // Converge the two tiles' positions
           tile.updatePosition(pos2.next);
-	  next.updatePosition(pos2.next);
+          next.updatePosition(pos2.next);
           // Update the score
           self.score += merged.value;
 
           // The mighty 2048 tile
           if (merged.value === 243) self.won = true;
-        }
-        
-	 else if (!tile.merged){
+        } else if (!tile.merged){
           self.moveTile(tile, positions.farthest);
         }
 
         if (tile && !self.positionsEqual(cell, tile)) {
           moved = true; // The tile moved from its original cell!
         }
-        }
-      
+      }
     });
   });
 
